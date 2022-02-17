@@ -1,3 +1,5 @@
+import './Header.css';
+
 export default function Header({ inputValue, handleInputValueChange, handleSubmit }) {
 	return (
 		<form onSubmit={handleSubmit}>

@@ -1,5 +1,6 @@
+import './TodoList.css';
 import { nanoid } from 'nanoid';
-import TodoItem from './TodoItem';
+import TodoItem from '../TodoItem/TodoItem';
 
 function TodoList({ todos }) {
 	return (

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-import TodoList from './components/TodoList';
-import Header from './components/Header';
+import TodoList from './components/TodoList/TodoList.js';
+import Header from './components/Header/Header';
 
 function App() {
 	const TODOS = [
