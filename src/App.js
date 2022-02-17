@@ -5,30 +5,12 @@ import Header from './components/Header/Header';
 
 function App() {
 	const TODOS = [
-		{
-			isComplete: false,
-			text: 'Hit the bar',
-		},
-		{
-			isComplete: true,
-			text: 'Buy Milk',
-		},
-		{
-			isComplete: false,
-			text: 'Walk the dog',
-		},
-		{
-			isComplete: false,
-			text: 'Feed the cat',
-		},
-		{
-			isComplete: true,
-			text: 'Read a book',
-		},
-		{
-			isComplete: false,
-			text: 'Practice French horn',
-		},
+		{ id: 'UiMkLBLyB4zy88rHtEGMi', isComplete: false, text: 'Hit the bar' },
+		{ id: 'M9d6J5En0Y-azJGEeonEm', isComplete: true, text: 'Buy Milk' },
+		{ id: 'GX0hwrK0uIreq1sE7w_Oj', isComplete: false, text: 'Walk the dog' },
+		{ id: 'tYfF43PAxHCCcBCwUo1-j', isComplete: false, text: 'Feed the cat' },
+		{ id: 'FQ400XisCb75BaEQnqIqk', isComplete: true, text: 'Read a book' },
+		{ id: 'y8b9oMZxCo-IeQobsjbgg', isComplete: false, text: 'Practice French horn' },
 	];
 
 	const [inputValue, setInputValue] = useState('');
@@ -46,6 +28,8 @@ function App() {
 		setInputValue('');
 	}
 
+	// function handleTodoItemClick() {}
+
 	return (
 		<div className='App'>
 			<h2>REACT todo app</h2>
@@ -54,7 +38,10 @@ function App() {
 				handleInputValueChange={handleInputValueChange}
 				handleSubmit={handleSubmit}
 			/>
-			<TodoList todos={todos} />
+			<TodoList
+				// handleTodoItemClick={handleTodoItemClick}
+				todos={todos}
+			/>
 		</div>
 	);
 }

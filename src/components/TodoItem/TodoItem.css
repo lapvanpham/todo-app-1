@@ -1,3 +1,4 @@
-.completed {
-	background-color: lightgreen;
+.complete {
+	background-color: lightgreen !important;
+	text-decoration: line-through;
 }

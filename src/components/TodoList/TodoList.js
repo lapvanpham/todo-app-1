@@ -1,12 +1,17 @@
 import './TodoList.css';
-import { nanoid } from 'nanoid';
 import TodoItem from '../TodoItem/TodoItem';
 
-function TodoList({ todos }) {
+function TodoList({ todos, handleTodoItemClick }) {
 	return (
 		<ul>
 			{todos.map((todo) => {
-				return <TodoItem key={nanoid()} todo={todo} />;
+				return (
+					<TodoItem
+						// handleTodoItemClick={handleTodoItemClick}
+						key={todo.id}
+						todo={todo}
+					/>
+				);
 			})}
 		</ul>
 	);

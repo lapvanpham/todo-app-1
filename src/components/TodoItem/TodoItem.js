@@ -1,5 +1,11 @@
 import './TodoItem.css';
 
 export default function TodoItem({ todo }) {
-	return <li className={todo.isCompleted && 'completed'}>{todo.text}</li>;
+	function handleTodoItemClick(e) {}
+	let itemClass = todo.isCompleted ? 'test' : '';
+	return (
+		<li className={todo.isComplete ? 'complete' : ''} onClick={handleTodoItemClick}>
+			{todo.text}
+		</li>
+	);
 }
