@@ -1,48 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import TodoList from './components/TodoList/TodoList.js';
-import Header from './components/Header/Header';
+import Form from './components/Form/Form.js';
 
 function App() {
-	const TODOS = [
-		{ id: 'UiMkLBLyB4zy88rHtEGMi', isComplete: false, text: 'Hit the bar' },
-		{ id: 'M9d6J5En0Y-azJGEeonEm', isComplete: true, text: 'Buy Milk' },
-		{ id: 'GX0hwrK0uIreq1sE7w_Oj', isComplete: false, text: 'Walk the dog' },
-		{ id: 'tYfF43PAxHCCcBCwUo1-j', isComplete: false, text: 'Feed the cat' },
-		{ id: 'FQ400XisCb75BaEQnqIqk', isComplete: true, text: 'Read a book' },
-		{ id: 'y8b9oMZxCo-IeQobsjbgg', isComplete: false, text: 'Practice French horn' },
-	];
+	const localTodos = JSON.parse(localStorage.getItem('localTodos'));
 
 	const [inputValue, setInputValue] = useState('');
-	const [todos, setTodos] = useState(TODOS);
+	const [todos, setTodos] = useState(localTodos || []);
+	const [completedStatus, setCompletedStatus] = useState('all');
+	const [filteredTodos, setFilteredTodos] = useState(todos);
 
-	function handleInputValueChange(e) {
-		setInputValue(e.target.value);
-		console.log(inputValue);
-	}
+	const filterHandler = () => {
+		switch (completedStatus) {
+			case 'completed':
+				setFilteredTodos(todos.filter((item) => item.completed === true));
+				break;
+			case 'uncompleted':
+				setFilteredTodos(todos.filter((item) => item.completed === false));
+				break;
+			default:
+				setFilteredTodos(todos);
+				break;
+		}
+	};
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		setTodos((prev) => [...prev, { isComplete: false, text: inputValue }]);
-		console.log(todos);
-		setInputValue('');
-	}
+	const saveTodosToLocal = () => {
+		localStorage.setItem('localTodos', JSON.stringify(todos));
+	};
 
-	// function handleTodoItemClick() {}
+	useEffect(() => {
+		filterHandler();
+	}, [todos, completedStatus]);
+
+	useEffect(() => {
+		saveTodosToLocal();
+	}, [todos]);
 
 	return (
-		<div className='App'>
-			<h2>REACT todo app</h2>
-			<Header
-				inputValue={inputValue}
-				handleInputValueChange={handleInputValueChange}
-				handleSubmit={handleSubmit}
-			/>
+		<>
+			<div id='myDIV' className='header'>
+				<h2>My today's task</h2>
+				<Form
+					inputValue={inputValue}
+					setInputValue={setInputValue}
+					todos={todos}
+					setTodos={setTodos}
+					completedStatus={completedStatus}
+					setCompletedStatus={setCompletedStatus}
+				/>
+			</div>
+
 			<TodoList
-				// handleTodoItemClick={handleTodoItemClick}
-				todos={todos}
+				todos={filteredTodos}
+				setTodos={setTodos}
+				filteredTodos={filteredTodos}
+				setFilteredTodos={setFilteredTodos}
 			/>
-		</div>
+		</>
 	);
 }
 

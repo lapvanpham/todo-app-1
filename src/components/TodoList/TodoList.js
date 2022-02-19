@@ -1,15 +1,16 @@
 import './TodoList.css';
 import TodoItem from '../TodoItem/TodoItem';
 
-function TodoList({ todos, handleTodoItemClick }) {
+function TodoList({ todos, setTodos, filteredTodos }) {
 	return (
-		<ul>
-			{todos.map((todo) => {
+		<ul className='myUL'>
+			{filteredTodos.map((todo) => {
 				return (
 					<TodoItem
-						// handleTodoItemClick={handleTodoItemClick}
-						key={todo.id}
 						todo={todo}
+						key={todo.id}
+						todos={todos}
+						setTodos={setTodos}
 					/>
 				);
 			})}
