@@ -1,8 +1,8 @@
 import './TodoItem.css';
 
 export default function TodoItem({ todo, todos, setTodos }) {
-	const deleteHandler = () => {
-		console.log('del handled');
+	const deleteHandler = (e) => {
+		e.stopPropagation();
 		setTodos(todos.filter((item) => item.id !== todo.id));
 	};
 
